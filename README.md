@@ -12,11 +12,11 @@
 
 ### EASA Part-145  
 مقرراتی برای سازمان‌های تعمیر و نگهداری هواپیما و قطعات. شامل الزامات ساختاری، صلاحیت پرسنل، ابزار و تجهیزات کالیبره، کنترل کیفیت، مدیریت سوابق و صدور **CRS** و **Form 1**.  
-الهام‌بخش ماژول‌های: Work Execution، Inventory & Tooling، Quality & Compliance.  
+الهام‌بخش ماژول‌های: Work Execution، Inventory & Tooling، Quality & Compliance monitoring.  
 
 ### MOE (Maintenance Organization Exposition)  
 سند داخلی هر سازمان Part-145 برای شرح چگونگی اجرای الزامات. شامل ساختار سازمانی، شرح وظایف، فرآیندهای نگهداری، سیاست‌های کیفیت و مدیریت سوابق.  
-الهام‌بخش: لینک Findings به بندهای مرجع در Quality & Compliance.  
+الهام‌بخش: لینک Findings به بندهای مرجع در Quality & Compliance monitoring.  
 
 ### MOM (Maintenance Organization Manual)  
 دستورالعمل‌های داخلی سازمان، شامل گردش‌کار فرم‌ها، وظایف بخش‌ها، روش‌های داخلی.  
@@ -46,9 +46,9 @@
 چارچوب SMS و گزارش رخدادها. شامل Hazard Identification، Risk Assessment، Occurrence Reporting.  
 الهام‌بخش: Safety & Occurrence Reporting.  
 
-### QMM (Quality Management Manual)  
+### QMM (Quality Management monitoring Manual)  
 سند مدیریت کیفیت داخلی سازمان. شامل سیاست‌های ممیزی، Findings، CAPA.  
-الهام‌بخش: Quality & Compliance.  
+الهام‌بخش: Quality & Compliance monitoring.  
 
 ### OEM Docs (AMM, CMM, IPC, SRM)  
 مستندات سازنده هواپیما و قطعات. شامل دستورالعمل‌های گام‌به‌گام و حدود پذیرش.  
@@ -134,6 +134,21 @@
 - **خروجی/نوتیفیکیشن:** هشدار شکست Sync.  
 - **جداول:** integration_endpoint, integration_job, integration_log.  
 
+### Form 1 Management (جدید)
+- **کاربرد:** مدیریت، صدور، ردیابی و اعتبارسنجی **EASA Form 1** برای قطعات/تجهیزات.
+- **داده‌های نمایشی:** لیست Form 1 با فیلتر Part/Serial/Issuer/Status، Trace به Component→WO→Aircraft، KPI صحت اسناد.
+- **ورودی‌ها:** ایجاد/ویرایش Form 1 (Certificate No, Part/Serial, Issued Date, Issuing Org, Attachments)، تغییر وضعیت (Revoked/Expired).
+- **خروجی/نوتیفیکیشن:** Blocker هنگام نصب قطعه بدون Form 1 معتبر؛ هشدار مدیریتی Form 1های منقضی/ناقص.
+- **جداول:** `form1_certificate`, `component`, `install_event`, `work_order`, `aircraft`, `document`.
+
+### Form 4 Management (جدید)
+- **کاربرد:** مدیریت پست‌های کلیدی و **Form 4** (Post Holders) برای سازمان‌های Part-145/147.
+- **داده‌های نمایشی:** لیست Form 4 (Person, Position, OrgType, Status, Dates)، نما ساختار سازمانی، شاخص پوشش پست‌ها.
+- **ورودی‌ها:** ثبت/ویرایش Form 4 (Person, Position, Submitted/Approved Dates, Attachments)، بروزرسانی وضعیت مرجع.
+- **خروجی/نوتیفیکیشن:** هشدار جایگاه‌های خالی یا نزدیک انقضا؛ اخطار رد درخواست توسط مرجع.
+- **جداول:** `form4_declaration`, `person`, `organization`(145/147), `document`, `user_account`.
+
+
 ---
 
 ## 4. معماری داده (Data Architecture)  
@@ -192,7 +207,7 @@ erDiagram
 - **FORM1_CERTIFICATE → COMPONENT**: مدرک قانونی قطعه؛ در «Records».  
 - **AD_SB → AD_SB_COMPLIANCE → AIRCRAFT/COMPONENT**: انطباق AD/SB؛ در «Fleet» و «Quality».  
 - **PERSON → LICENSE_PART66/TRAINING_RECORD/COMPANY_AUTHORIZATION**: صلاحیت‌ها؛ در «Training & Authorizations».  
-- **AUDIT_PROGRAM → AUDIT_FINDING → CAPA**: چرخه ممیزی؛ در «Quality & Compliance».  
+- **AUDIT_PROGRAM → AUDIT_FINDING → CAPA**: چرخه ممیزی؛ در «Quality & Compliance monitoring».  
 - **HAZARD → OCCURRENCE → SAFETY_ACTION**: SMS؛ در «Safety & Occurrence Reporting».  
 - **STORE → STOCK_ITEM → STOCK_MOVEMENT**: مدیریت انبار؛ در «Inventory & Tooling».  
 - **DOCUMENT → DOCUMENT_LINK / TECH_LOG_ENTRY → AIRCRAFT**: اسناد و لاگ‌ها؛ در «Records & Tech Library».  
@@ -227,7 +242,7 @@ erDiagram
 - AMP & Forecast → هشدار سررسید نزدیک (Toast + Email).  
 - Work Execution → بلاک امضا بدون مجوز (Blocker Modal).  
 - Training & Auth → هشدار انقضای مجوز (Modal).  
-- Quality & Compliance → هشدار CAPA نزدیک به Deadline (Toast).  
+- Quality & Compliance monitoring → هشدار CAPA نزدیک به Deadline (Toast).  
 - Safety & Occurrence → هشدار رخداد با ریسک بالا (Blocker Modal).  
 - Inventory → هشدار Shelf-life/Calibration (Toast).  
 
@@ -256,7 +271,7 @@ erDiagram
 ## 9. ماتریس ردیابی (Traceability Matrix)  
 - Work Execution → Part-145 (CRS/Form 1).  
 - Training & Auth → Part-66, Part-147.  
-- Quality & Compliance → QMM, Part-145, MOE.  
+- Quality & Compliance monitoring → QMM, Part-145, MOE.  
 - SMS & Occurrence → Annex 19, EU 376/2014.  
 - AMP & Forecast → CAME/MMM, Part-M.  
 - Fleet & Config → Part-21, Part-M.  
