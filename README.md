@@ -257,14 +257,37 @@ erDiagram
 ---
 
 ## 8. KPIها و گزارش‌ها  
-- MTBF, MTTR.  
-- On-Time Maintenance %.  
-- Unscheduled Maintenance Rate.  
-- AD/SB Compliance %.  
-- Training Currency %.  
-- Calibration On-Time %.  
-- CAPA Closure Rate.  
-- Safety Indicators (High-Risk Occurrences, Actions Closed on Time).  
+## 12. Reliability & KPI Dashboard
+
+در این بخش شاخص‌های کلیدی عملکرد (KPIs) برای پایش اثربخشی عملیات نگهداری، ایمنی و انطباق آورده شده‌اند.  
+شاخص‌ها به دو دسته‌ی **Leading (پیش‌نگر)** و **Lagging (پس‌نگر)** تقسیم می‌شوند.
+
+| نام KPI | نوع شاخص | توضیح و کاربرد |
+|----------|-----------|----------------|
+| **On-Time Maintenance Rate (OTMR)** | Lagging | درصد کارهای نگهداری انجام‌شده در موعد مقرر. شاخص اصلی کارایی برنامه‌ریزی. |
+| **Mean Time Between Failures (MTBF)** | Lagging | میانگین زمان بین دو خرابی متوالی در یک سیستم یا قطعه. شاخص قابلیت اطمینان تجهیزات. |
+| **Mean Time To Repair (MTTR)** | Lagging | میانگین زمان لازم برای رفع خرابی‌ها. بیانگر سرعت واکنش تیم تعمیرات است. |
+| **Deferred Defect Rate (DDR)** | Lagging | درصد ایرادهایی که به پرواز بعدی منتقل شده‌اند. شاخص کیفیت نگهداری. |
+| **Repeat/Recurring Defect Rate (RDR)** | Lagging | درصد خرابی‌های تکرارشده طی 10 سیکل. شاخص کیفیت کار فنی و کنترل علل ریشه‌ای. |
+| **Planned vs Executed Work Orders** | Lagging | نسبت WOهای برنامه‌ریزی‌شده به اجراشده؛ شاخص اجرای AMP. |
+| **Average Work Order Cycle Time** | Lagging | میانگین زمان بین ایجاد WO تا صدور CRS. شاخص بهره‌وری تعمیرات. |
+| **AMP Task Overdue %** | Lagging | درصد وظایف AMP که از موعد گذشته‌اند. شاخص انضباط در اجرای نگهداری پیشگیرانه. |
+| **Audit Findings Open Rate** | Lagging | نسبت Findings باز به کل Findings. شاخص اثربخشی ممیزی‌ها. |
+| **Maintenance Cost per Flight Hour (MCFH)** | Lagging | هزینه نگهداری به ازای هر ساعت پرواز. شاخص اقتصادی بهره‌وری. |
+| **Training Compliance Rate** | **Leading** | درصد پرسنلی که دوره‌های الزامی را در بازه معتبر گذرانده‌اند. شاخص آمادگی سازمان. |
+| **Authorization Validity %** | **Leading** | درصد پرسنل فنی با مجوز فعال (Company Authorization). شاخص سلامت تیم فنی. |
+| **CAPA Closure Effectiveness** | **Leading** | درصد CAPAهای بسته‌شده در موعد مقرر و با اثربخشی تأییدشده. شاخص کیفیت اصلاحات. |
+| **Safety Occurrence Reporting Rate** | **Leading** | نرخ گزارش رخدادهای ایمنی به ازای 1000 ساعت پرواز. شاخص فرهنگ گزارش‌دهی ایمنی. |
+| **Preventive vs Corrective Maintenance Ratio** | **Leading** | نسبت فعالیت‌های پیشگیرانه به اصلاحی. شاخص بلوغ نگهداری. |
+| **Form 4 Validity Compliance** | **Leading** | درصد پست‌های کلیدی با Form 4 معتبر. شاخص انطباق سازمانی با Part-145. |
+| **Mean Risk Reduction per Action** | **Leading** | کاهش میانگین Risk Score بعد از اجرای اقدامات ایمنی. شاخص اثربخشی SMS. |
+| **Human Error Index (HEI)** | **Leading** | درصد رخدادهایی با منشأ خطای انسانی. با آموزش HF کاهش می‌یابد. |
+| **Quality Audit Coverage %** | **Leading** | درصد فرآیندهای تحت ممیزی در سال جاری. شاخص بلوغ QMS. |
+| **Early Defect Detection Ratio (EDDR)** | **Leading (جدید)** | درصد ایرادهایی که قبل از خرابی واقعی (از طریق ترند یا بازرسی) شناسایی شده‌اند. شاخص قدرت پیش‌بینی خرابی‌ها. |
+| **Maintenance Forecast Accuracy (MFA)** | **Leading (جدید)** | میزان دقت پیش‌بینی وظایف AMP و Forecast نسبت به وقوع واقعی. شاخص کیفیت داده و مدل‌سازی. |
+| **Training Gap Lead Time (TGLT)** | **Leading (جدید)** | میانگین فاصله زمانی بین شناسایی نیاز آموزشی تا اجرای آن. هرچه کمتر، واکنش آموزشی سریع‌تر. |
+| **Spare Readiness Index (SRI)** | **Leading (جدید)** | درصد قطعات بحرانی که موجودی آماده برای WO دارند. شاخص آمادگی لجستیکی. |
+| **Safety Awareness Participation Rate (SAPR)** | **Leading (جدید)** | درصد کارکنانی که در برنامه‌های ایمنی (Safety Briefs/Workshops) شرکت کرده‌اند. شاخص فرهنگ ایمنی. |
 
 ---
 
